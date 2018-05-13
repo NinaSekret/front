@@ -88,6 +88,9 @@
           <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
           <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col" id="mainContent">
 
+
+
+
              <!-- <h5>АНКЕТА КАНДИДАТА </h5>
               <p style="margin-bottom: 0px">
                 Уважаемый кандидат!
@@ -115,7 +118,7 @@
                   <input class="mdl-textfield__input" type="text" id="sample3">
                   <label class="mdl-textfield__label" for="sample3">Когда Вы можете приступить к работе</label>
                 </div>
-              </form>
+
               <p>Контактная Информация:</p>
 
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -136,21 +139,21 @@
 
               <p>Паспортные данные:</p>
               <div class="mdl-grid mdl-cell--no-margin">
-                <form action="#" class="mdl-cell mdl-cell--3-col mdl-cell--no-margin">
+                <div action="#" class="mdl-cell mdl-cell--3-col mdl-cell--no-margin">
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield--small">
                     <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4">
                     <label class="mdl-textfield__label" for="sample4">Серия</label>
                     <span class="mdl-textfield__error">Введенные данные не корректны!</span>
                   </div>
-                </form>
+                </div>
 
-                <form action="#" class="mdl-cell mdl-cell--3-col mdl-cell--no-margin">
+                <div action="#" class="mdl-cell mdl-cell--3-col mdl-cell--no-margin">
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield--small">
                     <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4">
                     <label class="mdl-textfield__label" for="sample4">Номер</label>
                     <span class="mdl-textfield__error">Введенные данные не корректны!</span>
                   </div>
-                </form>
+                </div>
               </div>
 
                 <div class="mdl-textfield mdl-textfield--full mdl-js-textfield mdl-textfield--floating-label">
@@ -159,19 +162,19 @@
                 </div>
 
               <div class="mdl-grid mdl-cell--no-margin">
-                <form action="#" class="mdl-cell mdl-cell--3-col mdl-cell--no-margin">
+                <div action="#" class="mdl-cell mdl-cell--3-col mdl-cell--no-margin">
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  mdl-textfield--small">
                     <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4">
                     <label class="mdl-textfield__label" for="sample4">Дата рождения</label>
                     <span class="mdl-textfield__error">Введенные данные не корректны!</span>
                   </div>
-                </form>
-                <form action="#" class="mdl-cell mdl-cell--3-col mdl-cell--no-margin mdl-cell--margin-left">
+                </div>
+                <div action="#" class="mdl-cell mdl-cell--3-col mdl-cell--no-margin mdl-cell--margin-left">
                   <div class="mdl-textfield mdl-textfield--small mdl-js-textfield mdl-textfield--floating-label">
                     <input class="mdl-textfield__input" type="text" id="sample3">
                     <label class="mdl-textfield__label" for="sample3">Место рождения</label>
                   </div>
-                </form>
+                </div>
               </div>
                 <div class="mdl-textfield mdl-textfield--midle mdl-js-textfield mdl-textfield--floating-label">
                   <input class="mdl-textfield__input" type="text" id="sample3">
@@ -198,46 +201,158 @@
     <a href="https://github.com/google/material-design-lite/blob/mdl-1.x/templates/article/" target="_blank" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">Отправить</a>
     <script src="../mdl/material.min.js"></script>
     			<script type="text/babel">
-          var fieldOptions = [
-            {
-              className : null,
-              label : 'Фамилия Имя Отчество'
-            },
-            {
-              className : 'mdl-textfield--full',
-              label : 'Если изменяли фамилию, то укажите прежнюю фамилию, а так же причину смены'
-            }
-          ]
-				var InputBox = React.createClass({
-					render: function(){
-            const item = this.props.item;
-            var newInput = item.map(function(item, index){
+
+
+  				var Input = React.createClass({
+  					render: function() {
+              var errorSpan = '';
+              var input = (<input className="mdl-textfield__input" type="text" id="sample3" />);
+              if ('validation' in this.props.options) {
+                errorSpan = (<span className="mdl-textfield__error">{this.props.options.validation.errorMsg}</span>);
+                input = (<input className="mdl-textfield__input" type="text" pattern={`${this.props.options.validation.pattern}`} id="sample3" />);
+              };
               return (
-                <div key={index} className={`mdl-textfield mdl-js-textfield ${item.className} mdl-textfield--floating-label`}>
-                  <input className="mdl-textfield__input" type="text" id="sample3" />
-                  <label className="mdl-textfield__label" for="sample3">{item.label}</label>
+                <div key={this.props.key} className={`mdl-textfield mdl-js-textfield ${this.props.options.className} mdl-textfield--floating-label`}>
+                  {input}
+                  <label className="mdl-textfield__label" for="sample3">{this.props.options.label}</label>
+                  {errorSpan}
                 </div>
               );
+  					}
+  				});
+
+
+				var BaseInfo = React.createClass({
+          getFieldsOptions: function() {
+            return [
+              {
+                className : null,
+                label : 'Фамилия Имя Отчество',
+              },
+              {
+                className : 'mdl-textfield--full',
+                label : 'Если изменяли фамилию, то укажите прежнюю фамилию, а так же причину смены',
+              },
+              {
+                className : null,
+                label : 'Предполагаемая должность',
+              },
+              {
+                className : 'mdl-textfield--midle',
+                label : 'Когда Вы можете приступить к работе',
+              }
+            ];
+          },
+					render: function(){
+            var newInput = this.getFieldsOptions().map(function(item, index){
+              return (<Input key={index} options={item}/>);
             })
-              return (
-              <div className="news">
-                {newInput}
-              </div>
+
+            return (
+            <div className="news">
+              {newInput}
+            </div>
             );
-
 					}
-				})
+				});
 
-				ReactDOM.render(
-          <h5>АНКЕТА КАНДИДАТА </h5>
-           <p style="margin-bottom: 0px">
-             Уважаемый кандидат!
-             Заполните, пожалуйста, анкету, отвечая на вопросы по возможности более полно.
-           </p>
 
-          <InputBox item = {fieldOptions} />,document.getElementById("mainContent")
+          var ContactInfo = React.createClass({
+          getFieldsOptions: function(field) {
+            var itemsOptions =  {
+              "serial": {
+                label : 'Серия',
+                validation :  {
+                  errorMsg : 'Введенные данные не корректны!',
+                  pattern : '-?[0-9]*(\.[0-9]+)?'
+                }
+              },
+              "number": {
+                label : 'Номер',
+                validation :  {
+                  errorMsg : 'Введенные данные не корректны!',
+                  pattern : '-?[0-9]*(\.[0-9]+)?'
+                }
+              },
+              "issued": {
+                label : 'Когда и кем выдан',
+                className : 'mdl-textfield--full'
+              },
+              "birthday": {
+                id: 'sovmestit',
+                label : 'Дата рождения',
+                className : 'mdl-textfield--small',
+                validation :  {
+                  errorMsg : 'Введенные данные не корректны!',
+                  pattern : '-?[0-9]*(\.[0-9]+)?'
+                }
+              },
+              "place_of_Birth": {
+                id: 'sovmestit',
+                label : 'Место рождения',
+                className : 'mdl-textfield--small',
+              },
+              "registration_address": {
+                label : 'Адрес регистрации по месту жительства',
+                className : 'mdl-textfield--midle'
+              },
+              "home_address": {
+                label : 'Адрес фактического проживания',
+                className : 'mdl-textfield--midle'
+              }
+            };
 
-        );
+            return itemsOptions[field];
+          },
+            render : function(){
+
+              return (
+                <div>
+                <div className="mdl-grid mdl-cell--no-margin">
+                  <div action="#" className="mdl-cell mdl-cell--3-col mdl-cell--no-margin">
+                    <Input options={this.getFieldsOptions('serial')}/>
+                  </div>
+                  <div action="#" className="mdl-cell mdl-cell--3-col mdl-cell--no-margin mdl-cell--margin-left">
+                    <Input options={this.getFieldsOptions('number')}/>
+                  </div>
+                </div>
+                <Input options={this.getFieldsOptions('issued')}/>
+                <div className="mdl-grid mdl-cell--no-margin">
+                  <div action="#" className="mdl-cell mdl-cell--3-col mdl-cell--no-margin">
+                    <Input options={this.getFieldsOptions('birthday')}/>
+                  </div>
+                  <div action="#" className="mdl-cell mdl-cell--3-col mdl-cell--no-margin mdl-cell--margin-left">
+                    <Input options={this.getFieldsOptions('place_of_Birth')}/>
+                  </div>
+                </div>
+                  <Input options={this.getFieldsOptions('registration_address')}/>
+                  <Input options={this.getFieldsOptions('home_address')}/>
+                </div>
+              );
+
+            }
+          });
+
+         var Header = React.createClass({
+           render: function(){
+             return(
+               <div>
+               <h5>АНКЕТА КАНДИДАТА </h5>
+                <p style={{marginBottom: 0}}>
+                  Уважаемый кандидат!
+                  Заполните, пожалуйста, анкету, отвечая на вопросы по возможности более полно.
+                </p>
+                <BaseInfo />
+                <p>Паспортные данные:</p>
+                <ContactInfo />
+
+                </div>
+             );
+           }
+         });
+
+
+				ReactDOM.render(<Header />,document.getElementById("mainContent"));
 			</script>
   </body>
 </html>
