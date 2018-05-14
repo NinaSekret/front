@@ -222,7 +222,7 @@
   				});
 
 
-				var BaseInfo = React.createClass({
+		var BaseInfo = React.createClass({
           getFieldsOptions: function() {
             return [
               {
@@ -238,7 +238,7 @@
                 label : 'Предполагаемая должность',
               },
               {
-                className : 'mdl-textfield--midle',
+                className : 'mdl-textfield--full',
                 label : 'Когда Вы можете приступить к работе',
               }
             ];
@@ -255,9 +255,44 @@
             );
 					}
 				});
+		
+		var ContactInfo = React.createClass({
+		getFieldsOptions: function(field) {
+		var itemsOptions =  {
+		"phone_number" : { 
+			label : 'Номер телефона',
+	        validation :  {
+			  errorMsg : 'Введенные данные не корректны!',
+			  pattern : '-?[0-9]*(\.[0-9]+)?'
+			  }
+			},
+		"email" : {
+			label : 'Email (можно и резервный)',
+			className : 'mdl-textfield--midle'
+		},
+		"skype" : {
+			label : "Skype"
+		}
+		  };
+		  return itemsOptions[field];
+		},
+		render : function(){
 
+	return (<div>
+			<div>
+				<Input options={this.getFieldsOptions('phone_number')}/>
+			</div>
+			<div>
+				<Input options={this.getFieldsOptions('email')}/>
+			</div>
+				<Input options={this.getFieldsOptions('skype')}/>
+		    </div>
+			); 
+		  }
+		});
+	
 
-          var ContactInfo = React.createClass({
+          var PassportData = React.createClass({
           getFieldsOptions: function(field) {
             var itemsOptions =  {
               "serial": {
@@ -267,7 +302,7 @@
                   pattern : '-?[0-9]*(\.[0-9]+)?'
                 }
               },
-              "number": {
+              "number" : {
                 label : 'Номер',
                 validation :  {
                   errorMsg : 'Введенные данные не корректны!',
@@ -287,7 +322,7 @@
                   pattern : '-?[0-9]*(\.[0-9]+)?'
                 }
               },
-              "place_of_Birth": {
+              "place_of_birth": {
                 id: 'sovmestit',
                 label : 'Место рождения',
                 className : 'mdl-textfield--small',
@@ -322,7 +357,7 @@
                     <Input options={this.getFieldsOptions('birthday')}/>
                   </div>
                   <div action="#" className="mdl-cell mdl-cell--3-col mdl-cell--no-margin mdl-cell--margin-left">
-                    <Input options={this.getFieldsOptions('place_of_Birth')}/>
+                    <Input options={this.getFieldsOptions('place_of_birth')}/>
                   </div>
                 </div>
                   <Input options={this.getFieldsOptions('registration_address')}/>
@@ -343,9 +378,10 @@
                   Заполните, пожалуйста, анкету, отвечая на вопросы по возможности более полно.
                 </p>
                 <BaseInfo />
+                <p>Контактная информация:</p>
+        		<ContactInfo />
                 <p>Паспортные данные:</p>
-                <ContactInfo />
-
+                <PassportData />
                 </div>
              );
            }
