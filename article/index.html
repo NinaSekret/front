@@ -27,7 +27,7 @@
     <!--
     <link rel="canonical" href="http://www.example.com/">
     -->
-
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="../mdl/material.css">
@@ -36,7 +36,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
-
+	
     <style>
     #view-source {
       position: fixed;
@@ -264,9 +264,9 @@
                   Заполните, пожалуйста, анкету, отвечая на вопросы по возможности более полно.
                 </p>
                 <BaseInfo />
-                <p>Контактная информация:</p>
+                <p style={{marginBottom: 0}}>Контактная информация:</p>
         		<ContactInfo />
-                <p>Паспортные данные:</p>
+                <p style={{marginBottom: 0}}>Паспортные данные:</p>
                 <PassportData />
                 </div>
              );
