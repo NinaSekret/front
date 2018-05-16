@@ -1,26 +1,26 @@
 module.exports = {
-  fetchTasks: {
-    path: '/api/v001/tasks',
+  fetchForms: {
+    path: '/api/v1/forms',
     method: 'GET',
   },
 
-  fetchTask: {
-    path: '/api/v001/tasks/:id',
+  fetchForm: {
+    path: '/api/v1/forms/:id',
     method: 'GET',
   },
 
-  addTask: {
-    path: '/api/v001/tasks',
+  addForm: {
+    path: '/api/v1/forms',
     method: 'POST',
   },
 
-  updateTask: {
-    path: '/api/v001/tasks/:id',
+  updateForm: {
+    path: '/api/v1/forms/:id',
     method: 'PATCH',
   },
 
-  deleteTask: {
-    path: '/api/v001/tasks/:id',
+  deleteForm: {
+    path: '/api/v1/forms/:id',
     method: 'DELETE',
   },
 };
