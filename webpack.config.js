@@ -72,7 +72,7 @@ module.exports = {
     }),
   ],
   devServer: {
-    contentBase: './dist',
+    contentBase: './dist  ',
     historyApiFallback: true,
     hot: true,
     proxy: { '/api': 'http://localhost:3000' },

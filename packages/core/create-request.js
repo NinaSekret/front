@@ -1,6 +1,6 @@
 const apiConfig = require('./api-config');
 
-const API_HOST = 'http://localhost:3000';
+const API_HOST = 'http://localhost:8081';
 
 const compileUrl = (url, params) => {
   const resultArr = [];
@@ -47,6 +47,14 @@ const compileUrl = (url, params) => {
  */
 module.exports = (requestName, queryOptions, body) => {
   const options = apiConfig[requestName];
+
+  if (body instanceof FormData) {
+    var object = {};
+    body.forEach(function(value, key){
+        object[key] = value;
+    });
+    body = object;
+  }
 
   if (!options) {
     return Promise.reject();
