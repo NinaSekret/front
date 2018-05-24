@@ -1,9 +1,14 @@
 const Form = require('form/form.jsx');
 const createRequest = require('core/create-request');
+import { Redirect } from 'react-router';
 
 class EditForm extends Form {
   componentDidMount() {
-    var id = this.getQueryVariable(this.props.location, 'id');
+
+//const { id } = this.props.match.params;
+//console.log(this.props);
+
+var id = this.getQueryVariable(this.props.location, 'id');
     createRequest('fetchForm', {id: id}).then((response) => {
       this.setState({ form: response.data || [] });
     });
@@ -28,6 +33,7 @@ class EditForm extends Form {
 
     var id = this.getQueryVariable(this.props.location, 'id');
 
+    this.setState({redirectToList: true});
     createRequest('updateForm', {id: id}, formData).then(function(response){
       console.log(response);
     });

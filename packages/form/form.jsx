@@ -1,6 +1,7 @@
 const React = require('react');
 var createReactClass = require('create-react-class');
 const createRequest = require('core/create-request');
+import { Redirect } from 'react-router';
 
 
 var Input = createReactClass({
@@ -11,6 +12,10 @@ var Input = createReactClass({
     var errorSpan = '';
 
     var value = (this.state !== null && this.state.value !== null) ? this.state.value : this.props.value;
+    var isDirty = '';
+    if (value) {
+      isDirty = 'is-dirty';
+    }
 
     var input = (<input name={`${this.props.options.name}`} className="mdl-textfield__input" onChange={this.handleChange} value={value} type="text" id="sample3" />);
     if ('validation' in this.props.options) {
@@ -18,7 +23,7 @@ var Input = createReactClass({
       input = (<input name={`${this.props.options.name}`} className="mdl-textfield__input" onChange={this.handleChange} value={value} type="text" pattern={`${this.props.options.validation.pattern}`} id="sample3" />);
     };
     return (
-      <div  className={`mdl-textfield mdl-js-textfield ${this.props.options.className} mdl-textfield--floating-label`}>
+      <div  className={`mdl-textfield mdl-js-textfield ${this.props.options.className} mdl-textfield--floating-label ${isDirty}`}>
         {input}
         <label className="mdl-textfield__label" for="sample3">{this.props.options.label}</label>
         {errorSpan}
@@ -218,17 +223,16 @@ var Header = createReactClass({
 class Header extends React.Component
 {
   componentDidMount() {
-    this.setState({ form: {} });
+    this.setState({ form: {}, redirectToList: false});
   }
-
-
-
 
   onSubmit(event) {
     var form = event.target;
     var formData = new FormData(form);
     event.preventDefault();
 
+
+    this.setState({redirectToList: true});
     createRequest('addForm', {}, formData).then(function(response){
       console.log(formData);
     });
@@ -237,6 +241,11 @@ class Header extends React.Component
   }
 
   render() {
+
+    if (this.state && this.state.redirectToList) {
+        return <Redirect push to="/all-forms" />;
+    }
+
     var form = (this.state && this.state.form) ? this.state.form : {};
     return(
      <form onSubmit={((e) => this.onSubmit(e))} id="add-form" method="post" action='/api/v1/forms/'>

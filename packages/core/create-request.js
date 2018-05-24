@@ -1,6 +1,6 @@
 const apiConfig = require('./api-config');
 
-const API_HOST = 'http://localhost:8081';
+const API_HOST = 'http://localhost:8085';
 
 const compileUrl = (url, params) => {
   const resultArr = [];
@@ -74,7 +74,6 @@ module.exports = (requestName, queryOptions, body) => {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
         response.messages = response.messages || [];
         resolve(response);
       })

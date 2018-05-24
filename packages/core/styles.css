@@ -1,30 +1,26 @@
 
 body{
- font-family: 'Open Sans', sans-serif;
+ font-family: 'Roboto', sans-serif;
 }
-.demo-ribbon {flex-shrink: 0;
+.demo-ribbon {flex-shrink: 0;width: 100%;height: 40vh;background-color: #3F51B5;
 
-  width: 100%;height: 40vh;background-color: #3F51B5;
   }
 .header-height {
   min-height: 100px;
 }
-.demo-main {flex-shrink: 0;
+.demo-main {flex-shrink: 0;margin-top: -35vh;
 
-  margin-top: -35vh;
   }
 
 .demo-header .mdl-layout__header-row {
   padding-left: 40px;
 }
 
-.demo-container {width: calc(100% - 16px);
-  max-width: 1600px;margin: 0 auto;
+.demo-container {width: calc(100% - 16px);max-width: 1600px;margin: 0 auto;
   }
 
-.demo-content {margin-bottom: 80px;padding: 80px 56px;
+.demo-content {margin-bottom: 80px;padding: 80px 56px;border-radius: 2px;
 
-  border-radius: 2px;
   }
 
 .demo-layout.is-small-screen .demo-content {
@@ -58,14 +54,19 @@ body{
   margin-left: 30px;
 }
 .text-align{
-  text-align: center;
+  text-align: center !important;
 }
-.logo{width: 160px;height: 70px;
-  padding-top: 30px;
+.logo{width: 160px;height: 70px;padding-top: 30px;
   }
 .mdl-textfield__input{
   font-family: 'Open Sans', sans-serif;font-weight: normal;
   }
 p{
   font-size: 16px;font-weight: bold;
-    }
+  }
+.button-castom{
+  border: none;outline: none;background-color: transparent;
+  }
+.table-width{
+  width: 100%;
+}

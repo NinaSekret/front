@@ -7,8 +7,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   context: path.join(__dirname, 'packages'),
   entry: [
-    'react-hot-loader/patch',
     './mdl/material.js',
+    'react-hot-loader/patch',
     './mdl/material.css',
     './core/styles.css',
     './core/init.js',
@@ -16,6 +16,7 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, '/dist'),
+    publicPath: '/',
   },
   devtool: 'source-map',
   module: {
