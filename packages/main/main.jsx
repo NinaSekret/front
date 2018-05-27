@@ -9,7 +9,7 @@ const Main = () => (
   <Router>
     <div className="main">
       <Route path="/" exact component={Form} />
-        <Route path="/edit-forms" exact component={EditForm} />
+      <Route path="/edit-forms" exact component={EditForm} />
       <Route path="/all-forms" exact component={allForms} />
     </div>
   </Router>

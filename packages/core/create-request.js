@@ -1,11 +1,9 @@
 const apiConfig = require('./api-config');
-
-const API_HOST = 'http://localhost:8085';
+const API_HOST = 'http://localhost:8080';
 
 const compileUrl = (url, params) => {
   const resultArr = [];
   const options = Object.assign({}, params);
-
   const pathArr = url.split('/');
 
   pathArr.forEach((item) => {
@@ -41,17 +39,17 @@ const compileUrl = (url, params) => {
 };
 
 /**
- * [exports description]
- * @param  {{path: string, method: string}} options fetch options
- * @return {Promise}
- */
+* [exports description]
+* @param  {{path: string, method: string}} options fetch options
+* @return {Promise}
+*/
 module.exports = (requestName, queryOptions, body) => {
   const options = apiConfig[requestName];
 
   if (body instanceof FormData) {
     var object = {};
     body.forEach(function(value, key){
-        object[key] = value;
+      object[key] = value;
     });
     body = object;
   }
@@ -72,22 +70,22 @@ module.exports = (requestName, queryOptions, body) => {
       mode: 'cors',
       body: body ? JSON.stringify(body) : undefined,
     })
-      .then((response) => response.json())
-      .then((response) => {
-        response.messages = response.messages || [];
-        resolve(response);
-      })
-      .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.error(err);
-        console.log({
-          status: 'BAD_REQUEST',
-          messages: [{ type: 'ERROR', code: 'BAD_REQUEST' }],
-        });
-        resolve({
-          status: 'BAD_REQUEST',
-          messages: [{ type: 'ERROR', code: 'BAD_REQUEST' }],
-        });
+    .then((response) => response.json())
+    .then((response) => {
+      response.messages = response.messages || [];
+      resolve(response);
+    })
+    .catch((err) => {
+      // eslint-disable-next-line no-console
+      console.error(err);
+      console.log({
+        status: 'BAD_REQUEST',
+        messages: [{ type: 'ERROR', code: 'BAD_REQUEST' }],
       });
+      resolve({
+        status: 'BAD_REQUEST',
+        messages: [{ type: 'ERROR', code: 'BAD_REQUEST' }],
+      });
+    });
   });
 };
