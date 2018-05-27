@@ -35,15 +35,12 @@ class allForms extends React.Component {
       this.setState({ forms: response.data || [] });
     });
   }
-
-
-
+  
   render() {
     if (this.state.redirect) {
         var editUrl = "/edit-forms?id=" + this.state.formId;
         return <Redirect push to={editUrl} />;
     }
-
     const forms = this.state.forms;
 
     return (
