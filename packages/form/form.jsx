@@ -36,7 +36,6 @@ var Input = createReactClass({
       }
     });
 
-
     var BaseInfo = createReactClass({
       getFieldsOptions: function() {
         return [
@@ -115,7 +114,6 @@ var Input = createReactClass({
     }
   });
 
-
   var PassportData = createReactClass({
     getFieldsOptions: function(field) {
       var itemsOptions =  {
@@ -167,11 +165,11 @@ var Input = createReactClass({
           className : 'mdl-textfield--midle'
         }
       };
-
+      
       return itemsOptions[field];
     },
+    
     render : function(){
-
       return (
         <div>
           <div className="mdl-grid mdl-cell--no-margin">
@@ -215,12 +213,9 @@ var Input = createReactClass({
       createRequest('addForm', {}, formData).then(function(response){
         console.log(formData);
       });
-
-
     }
 
     render() {
-
       if (this.state && this.state.redirectToList) {
         return <Redirect push to="/all-forms" />;
       }
@@ -240,7 +235,6 @@ var Input = createReactClass({
           <PassportData form={form}/>
         </div>
       </form>
-
     );
   }
 }
