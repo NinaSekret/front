@@ -8,6 +8,7 @@ var Input = createReactClass({
   handleChange: function(event) {
     this.setState({value: event.target.value});
   },
+  
   render: function() {
     var errorSpan = '';
     var value = (this.state !== null && this.state.value !== null) ? this.state.value : this.props.value;
@@ -62,6 +63,7 @@ var Input = createReactClass({
           }
         ];
       },
+      
       render: function(){
         var form = this.props.form;
         var newInput = this.getFieldsOptions().map(function(item, index){
@@ -101,8 +103,7 @@ var Input = createReactClass({
         return itemsOptions[field];
       },
 
-      render : function(){
-        
+      render : function(){       
         return (<div>
           <div>
             <Input options={this.getFieldsOptions('phone_number')} value={this.props.form['phone-number']}/>
