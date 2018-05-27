@@ -25,6 +25,7 @@ var Input = createReactClass({
           onChange={this.handleChange} value={value} type="text"
           pattern={`${this.props.options.validation.pattern}`} id="sample3" />);
         };
+    
         return (
           <div  className={`mdl-textfield mdl-js-textfield ${this.props.options.className}
             mdl-textfield--floating-label ${isDirty}`}>
@@ -96,11 +97,12 @@ var Input = createReactClass({
             name : 'skype'
           }
         };
+        
         return itemsOptions[field];
       },
 
       render : function(){
-        console.log(this.props.form);
+        
         return (<div>
           <div>
             <Input options={this.getFieldsOptions('phone_number')} value={this.props.form['phone-number']}/>
@@ -220,6 +222,7 @@ var Input = createReactClass({
         return <Redirect push to="/all-forms" />;
       }
       var form = (this.state && this.state.form) ? this.state.form : {};
+      
       return(
         <form onSubmit={((e) => this.onSubmit(e))} id="add-form" method="post" action='/api/v1/forms/'>
         <div>
