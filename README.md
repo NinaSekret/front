@@ -1,2 +1,2 @@
-# react-redux
+# react
 example project
